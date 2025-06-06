@@ -1,12 +1,111 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-</head>
-<body>
-    <h1>Bienvenido, {{ username }}!</h1>
-    <p>Este es tu dashboard.</p>
-    <a href="{{ url_for('logout') }}">Cerrar sesión</a>
-   </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel de Citas Médicas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../static/css/estilos_dashboard.css" />
+    <script src="../static/js/dashboard.js"></script>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav class="nav">
+      <img src="../static/img/WD1Qq80.png" alt="Centro Médico Logo" />
+      <ul>
+        <li>
+          <a href="#">Inicio</a>
+        </li>
+        <li class="dropdown">
+          <a href="#">Usuario</a>
+          <div class="dropdown-content">
+            <a href="#">Perfil</a>
+            <a href="#" onclick="location.href='/logout'">Cerrar Sesión</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- SLIDER / HEADER -->
+    <section class="slider">
+      <div class="container">
+        <h1>Bienvenido al Portal de Pacientes</h1>
+        <p>Gestiona tus citas médicas de forma rápida y segura.</p>
+      </div>
+    </section>
+
+    <!-- PANEL DE OPCIONES -->
+    <section class="Department">
+      <div class="container">
+        <span>Panel de Control</span>
+        <h1>Opciones disponibles</h1>
+
+        <div class="icons">
+          <div onclick="modalAgendarCitas()">
+            <h3>📅</h3>
+            <p>Agendar Citas</p>
+          </div>
+          <div onclick="location.href='/pendientes'">
+            <h3>⏳</h3>
+            <p>Citas Pendientes</p>
+          </div>
+          <div onclick="location.href='/historial'">
+            <h3>📜</h3>
+            <p>Historial de Citas</p>
+          </div>
+          <div onclick="location.href='/perfil'">
+            <h3>👤</h3>
+            <p>Perfil del Paciente</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="modal_agendarCita" class="modal hidden">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Agendar Cita</h2>
+        <form id="form_agendar">
+          <div class="form-group">
+            <label for="especialidad">Especialidad</label>
+            <select id="especialidad" required>
+              <option value=""></option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="doctor">Doctor</label>
+            <select id="doctor" required>
+              <option value=""></option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="fecha">Fecha</label>
+            <input type="date" id="fecha" required />
+          </div>
+
+          <div class="form-group">
+            <label for="hora">Hora</label>
+            <input type="time" id="hora" required />
+          </div>
+
+          <div class="form-group">
+            <label for="motivo">Motivo</label>
+            <textarea id="motivo" rows="3" required></textarea>
+          </div>
+
+          <button type="submit" class="button">Confirmar Cita</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white text-center py-3">
+      <div class="container">
+        <p class="mb-0">© 2025 Centro Medico. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+  </body>
 </html>
