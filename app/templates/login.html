@@ -1,133 +1,141 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MediCitas - Acceso al Sistema</title>
-    <link rel="stylesheet" href="../static/css/estilos_login.css" />
-    <script src="../static/js/script.js"></script>
-  </head>
-  <body>
-    <div class="container">
-      <div class="welcome-section">
-        <a class="logo" href="/"
-          ><img src="../static/img/WD1Qq80.png" alt="Logo"
-        /></a>
-        <div class="welcome-text">
-          <h2>Bienvenido al Sistema de Citas Médicas</h2>
-          <p>
-            Gestiona tus citas médicas de manera fácil y segura. Accede a tu
-            cuenta o regístrate para comenzar a utilizar nuestros servicios.
-          </p>
-        </div>
-      </div>
 
-      <div class="form-section">
-        <div class="form-container">
-          <div class="form-toggle">
-            <button class="toggle-btn active" onclick="showLogin()">
-              Iniciar Sesión
-            </button>
-            <button class="toggle-btn" onclick="showRegister()">
-              Registrarse
-            </button>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediCitas - Acceso al Sistema</title>
+  <link rel="stylesheet" href="../static/css/estilos_login.css" />
+  <script src="../static/js/main.js"></script>
+</head>
 
-          <div class="success-message" id="successMessage">
-            ¡Registro exitoso! Ahora puedes iniciar sesión.
-          </div>
-
-          <form class="form" id="loginForm" method="POST" action="/login">
-            <div class="form-group">
-              <label for="loginUsername">Usuario o Email</label>
-              <input type="text" id="loginUsername" name="username" required />
-              <div class="error-message">Este campo es requerido</div>
-            </div>
-
-            <div class="form-group">
-              <label for="loginPassword">Contraseña</label>
-              <input
-                type="password"
-                id="loginPassword"
-                name="password"
-                required
-              />
-              <div class="error-message">Este campo es requerido</div>
-            </div>
-
-            <button type="submit" class="submit-btn">
-              <span class="btn-text">Iniciar Sesión</span>
-            </button>
-
-            <div class="forgot-password">
-              <a href="#" onclick="showForgotPassword()"
-                >¿Olvidaste tu contraseña?</a
-              >
-            </div>
-          </form>
-
-          <form
-            class="form hidden"
-            id="registerForm"
-            method="POST"
-            action="/register"
-          >
-            <div class="row">
-              <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" required />
-                <div class="error-message">Ingresa tu nombre</div>
-              </div>
-              <div class="form-group">
-                <label for="apellido">Apellido</label>
-                <input type="text" id="apellido" name="apellido" required />
-                <div class="error-message">Ingresa tu apellido</div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="correo">Correo Electrónico</label>
-              <input type="email" id="correo" name="correo" required />
-              <div class="error-message">Ingresa un correo válido</div>
-            </div>
-
-            <div class="form-group">
-              <label for="telefono">Teléfono</label>
-              <input type="tel" id="telefono" name="telefono" required />
-              <div class="error-message">Ingresa tu teléfono</div>
-            </div>
-
-            <div class="form-group">
-              <label for="registerPassword">Contraseña</label>
-              <input
-                type="password"
-                id="registerPassword"
-                name="password"
-                required
-                minlength="6"
-              />
-              <div class="error-message">
-                La contraseña debe tener al menos 6 caracteres
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="confirmPassword">Confirmar Contraseña</label>
-              <input
-                type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-                required
-              />
-              <div class="error-message">Las contraseñas no coinciden</div>
-            </div>
-
-            <button type="submit" class="submit-btn">
-              <span class="btn-text">Crear Cuenta</span>
-            </button>
-          </form>
-        </div>
+<body>
+  <div class="container">
+    <div class="welcome-section">
+      <a class="logo" href="/"><img src="../static/img/WD1Qq80.png" alt="Logo" /></a>
+      <div class="welcome-text">
+        <h2>Bienvenido al Sistema de Citas Médicas</h2>
+        <p>
+          Gestiona tus citas médicas de manera fácil y segura. Accede a tu
+          cuenta o regístrate para comenzar a utilizar nuestros servicios.
+        </p>
       </div>
     </div>
-  </body>
+
+    <div class="form-section">
+      <div class="form-container">
+        <div class="form-toggle" id="formToggle">
+          <button class="toggle-btn active">
+            Iniciar Sesión
+          </button>
+          <button class="toggle-btn">
+            Registrarse
+          </button>
+        </div>
+
+        <div class="success-message" id="successMessage">
+          ¡Registro exitoso! Ahora puedes iniciar sesión.
+        </div>
+
+        <form class="form" id="loginForm" method="POST" action="/login">
+          <div class="form-group">
+            <label for="loginUsername">Usuario o Email</label>
+            <input type="text" id="loginUsername" name="username" required />
+            <div class="error-message">Este campo es requerido</div>
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword">Contraseña</label>
+            <input type="password" id="loginPassword" name="password" required />
+            <div class="error-message">Este campo es requerido</div>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <span class="btn-text">Iniciar Sesión</span>
+          </button>
+
+          <div class="forgot-password">
+            <a href="#">¿Olvidaste tu contraseña?</a>
+          </div>
+        </form>
+
+        <form class="form hidden" id="registerForm" method="POST" action="/register">
+          <div class="row">
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="nombre" required />
+              <div class="error-message">Ingresa tu nombre</div>
+            </div>
+            <div class="form-group">
+              <label for="apellido">Apellido</label>
+              <input type="text" id="apellido" name="apellido" required />
+              <div class="error-message">Ingresa tu apellido</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="correo">Correo Electrónico</label>
+            <input type="email" id="correo" name="correo" required />
+            <div class="error-message">Ingresa un correo válido</div>
+          </div>
+
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" required />
+            <div class="error-message">Ingresa tu teléfono</div>
+          </div>
+
+          <div class="form-group">
+            <label for="registerPassword">Contraseña</label>
+            <input type="password" id="registerPassword" name="password" required minlength="6" />
+            <div class="error-message">
+              La contraseña debe tener al menos 6 caracteres
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirmar Contraseña</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required />
+            <div class="error-message">Las contraseñas no coinciden</div>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <span class="btn-text">Crear Cuenta</span>
+          </button>
+        </form>
+
+        <!-- Nueva sección para restablecer contraseña -->
+        <form class="form hidden" id="forgotPasswordForm" method="POST" action="/api/reset_password_simple">
+          <div class="form-group">
+            <label for="resetEmail">Correo Electrónico</label>
+            <input type="email" id="resetEmail" name="correo" required />
+            <div class="error-message">Ingresa un correo electrónico válido</div>
+          </div>
+
+          <div class="form-group">
+            <label for="newPasswordSimple">Nueva Contraseña</label>
+            <input type="password" id="newPasswordSimple" name="password" required minlength="6">
+            <div class="error-message">La contraseña debe tener al menos 6 caracteres</div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmNewPasswordSimple">Confirmar Nueva Contraseña</label>
+            <input type="password" id="confirmNewPasswordSimple" name="confirm_password" required>
+            <div class="error-message">Las contraseñas no coinciden</div>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <span class="btn-text">Restablecer Contraseña</span>
+          </button>
+
+          <div class="back-to-login">
+            <a href="#">Volver a Iniciar Sesión</a>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>

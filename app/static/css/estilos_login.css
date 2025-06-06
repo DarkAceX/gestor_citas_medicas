@@ -51,10 +51,12 @@ body {
 }
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0px) rotate(0deg);
   }
+
   50% {
     transform: translateY(-20px) rotate(180deg);
   }
@@ -94,6 +96,7 @@ body {
     opacity: 0;
     transform: translateX(-30px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -240,6 +243,21 @@ body {
 }
 
 .forgot-password a:hover {
+  text-decoration: underline;
+}
+
+.back-to-login {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.back-to-login a {
+  color: #4facfe;
+  text-decoration: none;
+  font-size: 0.95em;
+}
+
+.back-to-login a:hover {
   text-decoration: underline;
 }
 
