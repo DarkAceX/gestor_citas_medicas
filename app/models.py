@@ -40,3 +40,4 @@ class Cita(db.Model):
     tratamiento = db.Column(db.String(255))
     id_paciente = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     id_doctor = db.Column(db.Integer, db.ForeignKey('doctor.id_doctor'), nullable=False)
+    id_especializacion = db.Column(db.Integer, db.ForeignKey('especializacion.id_especializacion'), nullable=False)

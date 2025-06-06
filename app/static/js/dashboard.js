@@ -67,12 +67,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const hora = document.getElementById("hora").value;
             const motivo = document.getElementById("motivo").value;
             const doctor = document.getElementById("doctor").value;
+            const especialidad = document.getElementById("especialidad").value;
 
             const data = {
                 fecha: fecha,
                 hora: hora,
                 motivo: motivo,
-                id_doctor: doctor
+                id_doctor: doctor,
+                id_especializacion: especialidad
             };
 
             try {

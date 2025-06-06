@@ -65,6 +65,7 @@ def guardar_cita():
     hora = data['hora']
     motivo = data['motivo']
     id_doctor = data['id_doctor']  # <- Este valor debe estar en el JSON
+    id_especializacion = data['id_especializacion']
 
     # Verificar que no esté vacío
     if not id_doctor:
@@ -77,7 +78,8 @@ def guardar_cita():
         diagnostico='',
         tratamiento='',
         id_paciente=1,  # Suponiendo que estás usando login
-        id_doctor=id_doctor
+        id_doctor=id_doctor,
+        id_especializacion=id_especializacion
     )
 
     db.session.add(nueva_cita)
