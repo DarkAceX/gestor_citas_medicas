@@ -45,11 +45,11 @@
             <h3>📅</h3>
             <p>Agendar Citas</p>
           </div>
-          <div onclick="location.href='/pendientes'">
+          <div onclick="modalCitasPendientes()">
             <h3>⏳</h3>
             <p>Citas Pendientes</p>
           </div>
-          <div onclick="location.href='/historial'">
+          <div onclick="modalHistorialCitas()">
             <h3>📜</h3>
             <p>Historial de Citas</p>
           </div>
@@ -64,7 +64,7 @@
     <!-- Modal -->
     <div id="modal_agendarCita" class="modal hidden">
       <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
+        <span class="close" onclick="closeModalAgendarCita()">&times;</span>
         <h2>Agendar Cita</h2>
         <form id="form_agendar">
           <div class="form-group">
@@ -99,6 +99,67 @@
           <button type="submit" class="button">Confirmar Cita</button>
         </form>
       </div>
+    </div>
+
+    <div id="modal_citasPendientes" class="modal hidden">
+      <div class="modal-content">
+        <span class="close" onclick="closeModalCitasPendientes()">&times;</span>
+        <h2>Citas Pendientes</h2>
+        <div id="citas_pendientes_container">
+          <p>Cargando citas...</p>
+        </div>
+        <div class="modal-actions">
+          <button id="btnPagarCita" class="button" disabled>Pagar Cita</button>
+          <button id="btnCancelarCita" class="button button-danger" disabled>Cancelar Cita</button>
+          <button class="button" onclick="closeModalCitasPendientes()">Cerrar</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal_pago" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" onclick="closeModalPago()">&times;</span>
+            <h2>Procesar Pago</h2>
+            <form id="form_pago">
+                <div class="form-group">
+                    <label for="monto_pago">Monto a Pagar</label>
+                    <input type="number" id="monto_pago" step="0.01"  required>
+                </div>
+                <div class="form-group">
+                    <label for="metodo_pago">Método de Pago</label>
+                    <select id="metodo_pago" required>
+                        <option value="">Seleccione...</option>
+                        <option value="tarjeta">Tarjeta de Crédito/Débito</option>
+                        <option value="transferencia">Transferencia Bancaria</option>
+                        <option value="efectivo">Efectivo</option>
+                    </select>
+                </div>
+                <div class="form-group" id="card_details" style="display: none;">
+                    <label for="card_number">Número de Tarjeta</label>
+                    <input type="text" id="card_number" placeholder="XXXX XXXX XXXX XXXX" pattern="[0-9]{16}" title="Debe ser 16 dígitos" required>
+                    <label for="card_expiry">Fecha de Vencimiento (MM/AA)</label>
+                    <input type="text" id="card_expiry" placeholder="MM/AA" pattern="(0[1-9]|1[0-2])\/[0-9]{2}" title="Formato MM/AA" required></label>
+                    <label for="card_cvv">CVV</label>
+                    <input type="text" id="card_cvv" placeholder="XXX" pattern="[0-9]{3,4}" title="3 o 4 dígitos" required>
+                    <label for=""></label>
+                </div>
+                <button type="submit" class="button">Confirmar Pago</button>
+            </form>
+        </div>
+    </div>
+    <script src="../static/js/dashboard.js"></script>
+
+     <div id="modal_historialCitas" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" onclick="closeModalHistorialCitas()">&times;</span>
+            <h2>Historial de Citas</h2>
+            <div id="historial_citas_container">
+                <p>Cargando historial...</p>
+            </div>
+            <div class="modal-actions">
+                <button class="button" onclick="closeModalHistorialCitas()">Cerrar</button>
+            </div>
+        </div>
     </div>
 
     <!-- FOOTER -->

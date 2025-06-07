@@ -8,7 +8,7 @@
 /* ========== TIPOGRAFÍA GLOBAL ========== */
 body {
   font-family: "Eczar", serif;
-  line-height: 2.8;
+  line-height: 2.8; /* Ajustado para dar más espacio a las líneas, podrías querer ajustarlo para el contenido principal */
   background-color: #f9f9f9;
   color: #333;
   scroll-behavior: smooth;
@@ -48,6 +48,19 @@ body {
     transform: scale(1);
   }
 }
+
+/* Animación de aparición del modal (para modal-content) */
+@keyframes scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
 
 /* ========== NAV ========== */
 .nav {
@@ -304,21 +317,46 @@ section {
   width: 900px;
   height: 300px;
   margin: auto;
+  gap: 20px; /* Añadido gap para separación entre íconos */
+  justify-content: center; /* Centra los íconos si el width es menor */
 }
 
 .Department .icons div {
   width: 200px;
   height: 200px;
   border: 1px solid #eee;
-  margin-left: 20px;
+  /* margin-left: 20px; -- Eliminado para usar gap */
   padding: 30px 0;
+  display: flex; /* Para centrar contenido vertical y horizontalmente */
+  flex-direction: column; /* Para apilar h3 y p */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer; /* Indica que es clickeable */
+  transition: all 0.3s ease; /* Transición suave en hover */
+  border-radius: 10px; /* Ligeros bordes redondeados */
   animation: fadeInLeft 3s 1s linear;
 }
+
+.Department .icons div h3 {
+    font-size: 3em; /* Tamaño grande para el ícono emoji */
+    margin-bottom: 10px; /* Espacio entre el ícono y el texto */
+    line-height: 1; /* Elimina espacio extra de línea */
+}
+
+.Department .icons div p {
+    font-size: 1.1em;
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0; /* Elimina márgenes por defecto */
+}
+
 
 .Department .icons div:first-of-type,
 .Department .icons div:hover {
   background: #559af3;
   color: #fff;
+  transform: translateY(-5px); /* Pequeño efecto de levantamiento */
+  box-shadow: 0 8px 20px rgba(85, 154, 243, 0.4); /* Sombra al pasar el ratón */
 }
 
 .Department .text {
@@ -402,7 +440,7 @@ section {
 }
 
 .gallery-item:nth-child(4) {
-  animation-delay: 0.6
+  animation-delay: 0.6s
 }
 
 footer {
@@ -439,22 +477,12 @@ footer {
   padding: 40px;
   border-radius: 20px;
   width: 90%;
-  max-width: 500px;
+  max-width: 600px; /* Aumentado el ancho máximo para la tabla */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   position: relative;
   animation: scaleIn 0.3s ease forwards;
-}
-
-/* Animación de aparición */
-@keyframes scaleIn {
-  from {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+  /* line-height: normal; /* Asegura que el line-height no afecte el contenido del modal de manera extraña */
+  line-height: 1.5; /* Un line-height más estándar para texto dentro de modales */
 }
 
 /* Botón cerrar */
@@ -464,6 +492,21 @@ footer {
   right: 25px;
   font-size: 1.5em;
   cursor: pointer;
+  color: #aaa; /* Color para que se vea */
+  transition: color 0.3s ease;
+}
+
+.close:hover {
+  color: #333;
+}
+
+/* Título del modal */
+.modal-content h2 {
+  text-align: center; 
+  margin-bottom: 25px; /* Espacio debajo del título */
+  font-size: 2em; /* Un poco más grande para el título */
+  color: #333;
+  line-height: 1.2; /* Ajustar line-height del título */
 }
 
 /* Formularios */
@@ -476,22 +519,30 @@ footer {
 .modal-content .form-group label {
   font-weight: 600;
   margin-bottom: 5px;
+  display: block; /* Asegura que la label esté en su propia línea */
+  line-height: normal; /* Normaliza line-height para labels */
 }
 
 .modal-content .form-group input,
+.modal-content .form-group select, /* Añadido select */
 .modal-content .form-group textarea {
   padding: 12px;
   border: 2px solid #e1e5e9;
   border-radius: 10px;
   font-size: 1em;
   background-color: #f9f9fc;
+  width: 100%; /* Asegura que ocupen todo el ancho disponible */
+  box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+  line-height: normal; /* Normaliza line-height para inputs */
 }
 
 .modal-content .form-group input:focus,
+.modal-content .form-group select:focus,
 .modal-content .form-group textarea:focus {
   border-color: #4facfe;
   outline: none;
   background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.2); /* Sombra al enfocar */
 }
 
 /* Botón */
@@ -499,29 +550,122 @@ footer {
   background: linear-gradient(45deg, #4facfe, #00f2fe);
   border: none;
   color: white;
-  padding: 14px;
+  padding: 14px 25px; /* Ajustado padding */
   border-radius: 12px;
-  font-size: 1em;
+  font-size: 1.1em; /* Un poco más grande el texto del botón */
   cursor: pointer;
-}
-h2{
-  text-align: center; 
-}
-
-.modal-content select,
-.modal-content textarea {
-  width: 100%;
-  padding: 12px;
-  border: 2px solid #e1e5e9;
-  border-radius: 10px;
-  background-color: #f9f9fc;
-  font-size: 1em;
+  margin-top: 20px; /* Más espacio arriba */
   transition: all 0.3s ease;
+  align-self: center; /* Centra el botón en el formulario */
+  width: auto; /* Ancho automático según contenido */
 }
 
-.modal-content select:focus,
-.modal-content textarea:focus {
-  outline: none;
-  border-color: #4facfe;
-  background-color: #fff;
+.modal-content .button:hover {
+  opacity: 0.9;
+  transform: translateY(-2px); /* Pequeño efecto al pasar el ratón */
+  box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4); /* Sombra para el hover */
+}
+
+
+/* --- ESTILOS ESPECÍFICOS PARA LA TABLA DE CITAS PENDIENTES --- */
+/* Contenedor de la tabla */
+#citas_pendientes_container {
+    max-height: 400px; /* Altura máxima para el scroll si hay muchas citas */
+    overflow-y: auto; /* Habilita el scroll vertical */
+    margin-top: 20px; /* Espacio superior */
+    padding-right: 10px; /* Para que el scrollbar no se coma el contenido */
+}
+
+.citas-table {
+    width: 100%;
+    border-collapse: collapse; /* Para que los bordes de las celdas se unan */
+    font-size: 0.9em; /* Un poco más pequeña para densificar la información */
+    line-height: 1.5; /* Normaliza el line-height para la tabla */
+}
+
+.citas-table thead {
+    background-color: #e9ecef; /* Un color de fondo suave para la cabecera */
+    position: sticky; /* Encabezado pegajoso al hacer scroll */
+    top: 0;
+    z-index: 10; /* Asegura que el encabezado esté sobre el contenido al hacer scroll */
+}
+
+.citas-table th,
+.citas-table td {
+    border: 1px solid #dee2e6; /* Bordes suaves para las celdas */
+    padding: 10px; /* Espaciado interno de las celdas */
+    text-align: left; /* Alineación del texto a la izquierda */
+    vertical-align: top; /* Alineación vertical del texto */
+}
+
+.citas-table th {
+    font-weight: 600; /* Ligeramente más negrita que bold */
+    color: #343a40; /* Color de texto más oscuro para los encabezados */
+    text-transform: uppercase; /* Mayúsculas para los encabezados */
+    font-size: 0.95em;
+}
+
+/* Alternar colores de fila para mejor legibilidad */
+.citas-table tbody tr:nth-child(even) {
+    background-color: #f8f9fa; /* Color más claro para filas pares */
+}
+
+.citas-table tbody tr:hover {
+    background-color: #e2e6ea; /* Resaltar fila al pasar el ratón */
+}
+
+/* Ajuste para columnas específicas si es necesario (opcional) */
+.citas-table td:nth-child(1) { /* Fecha */
+    white-space: nowrap; /* Evita que la fecha se rompa en varias líneas */
+}
+.citas-table td:nth-child(2) { /* Hora */
+    white-space: nowrap;
+}
+
+/* Estilos para los botones de acción del modal de citas pendientes */
+.modal-actions {
+    display: flex;
+    justify-content: flex-end; /* Alinea los botones a la derecha */
+    gap: 15px; /* Espacio entre botones */
+    margin-top: 25px; /* Espacio superior */
+}
+
+/* Estilo para el botón de cancelar (opcional, para diferenciar) */
+.button-danger {
+    background: linear-gradient(45deg, #dc3545, #c82333); /* Rojo para cancelar */
+}
+
+.button-danger:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+}
+
+/* Estilos específicos para la tabla de citas para el checkbox */
+.citas-table th:first-child,
+.citas-table td:first-child {
+    width: 40px; /* Ancho fijo para la columna del checkbox */
+    text-align: center;
+}
+
+/* Opcional: Estilo para el checkbox */
+.citas-table input[type="checkbox"] {
+    transform: scale(1.3); /* Hace el checkbox un poco más grande */
+    cursor: pointer;
+}
+
+/* Asegurarse que el modal de pago tenga los mismos estilos base */
+/* (ya los tiene con .modal y .modal-content, pero lo menciono) */
+
+/* Estilos para los campos de tarjeta en el modal de pago */
+#card_details {
+    border: 1px solid #e1e5e9;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 15px;
+    background-color: #fcfcfc;
+}
+
+#card_details label {
+    margin-top: 10px;
 }
