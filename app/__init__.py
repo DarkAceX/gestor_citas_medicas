@@ -40,11 +40,6 @@ def create_app(config_class=Config):
     def render_index_page():
         return render_template('index.html')
 
-    # Definir la ruta GET para la página del dashboard, protegida con @login_required
-    @app.route('/dashboard', methods=['GET'])
-    @login_required
-    def render_dashboard_page():
-        return render_template('dashboard.html')
 
     # Nueva ruta para la página de restablecimiento de contraseña con token (GET)
     # @app.route('/reset_password/<token>', methods=['GET'])
